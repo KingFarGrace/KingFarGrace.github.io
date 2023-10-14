@@ -16,12 +16,15 @@
 <meta property="og:site_name" content="KingFarGrace的博客">
 <meta property="og:description" content="前言​	为什么要用Surface Pro 4作生产力工具？为什么要给Surface重装Ubuntu系统？标题槽点很多，但还请各位读者接受这一事实，因为笔者就是恰好有一台这样的“性价比”神机。至于重装系统，单纯只是因为在当今时代，高贵的Windows系统已经再也住不了4G内存128G硬盘的鸽子笼了。闲话少叙，笔者写下这篇博客，一方面是纪念摸着石头过河的壮举，另一方面，希望有相似需求的读者能看到这篇博">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://kingfargrace.github.io/home/kingfargrace/Pictures/%E6%91%84%E5%83%8F%E5%A4%B4/2023-10-13-154749.jpg">
+<meta property="og:image" content="http://kingfargrace.github.io/home/kingfargrace/Pictures/%E6%91%84%E5%83%8F%E5%A4%B4/2023-10-13-164529.jpg">
 <meta property="article:published_time" content="2023-10-07T13:55:34.000Z">
-<meta property="article:modified_time" content="2023-10-07T16:37:25.592Z">
+<meta property="article:modified_time" content="2023-10-14T09:47:47.998Z">
 <meta property="article:author" content="KingFarGrace">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="重装系统">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://kingfargrace.github.io/home/kingfargrace/Pictures/%E6%91%84%E5%83%8F%E5%A4%B4/2023-10-13-154749.jpg">
   
     <link rel="alternative" href="/atom.xml" title="KingFarGrace的博客" type="application/atom+xml">
   
@@ -220,10 +223,10 @@
 <blockquote>
 <p>本博客参考了国外大佬们提供的<a target="_blank" rel="noopener" href="https://github.com/linux-surface/linux-surface">linux-surface-kernel</a>，感谢他们帮我迈出了从零到一的一步，如果觉得这篇博客有帮助，别忘了给这个项目一个Star。</p>
 </blockquote>
-<h3 id="Ubuntu系统安装"><a href="#Ubuntu系统安装" class="headerlink" title="Ubuntu系统安装"></a>Ubuntu系统安装</h3><p>​	在一切开始之前，你需要准备一个可以安装Ubuntu系统的<strong>启动盘</strong>（这是最方便的安装方式，各位读者也可以用自己的方法来安装）。如果你已经有了一台Ubuntu机器，那么非常好，使用系统自带的<strong>启动盘创建器</strong>可以非常轻松地完成这件事。用Windows系统创建启动盘的具体操作步骤请看<a target="_blank" rel="noopener" href="https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#1-overview">这里</a>，英语不好的朋友请大胆使用浏览器自带的翻译功能，实在不行可以搜索其他人写的教程，笔者在这里就偷个懒不搬运了。</p>
-<p>​	启动盘创建好后，先不要直接将系统重装，在Windows系统下将计算机<strong>硬件驱动都更新一遍</strong>，以免重装系统之后出现硬件故障或不兼容的问题。与此同时，不要忘记将系统中重要的文件拷贝出来或者上传云盘，避免文件丢失或者损坏。当然，你也可以保留双系统，在磁盘中划出一部分留给Windows系统来装文件，但是既然都要重装系统，不如轻轻爽爽地与过去告别吧！更何况128G的硬盘空间没有继续分割的余地了。</p>
-<p>​	做完上面这一切后，激动人心的时刻终于来临：<strong>关闭Surface，插入启动盘，按住下音量键的同时按开机键，看到Surface的logo时不要松手，等到logo下面出现加载中的图标（转圈的圆圈）时再松开下音量键</strong>。少等片刻，就会进入Surface的<em>BIOS&#x2F;UEFI</em>界面。根据操作提示一步步操作，启动盘里装的是什么系统就选择安装什么系统，之后就按照系统提示一步步操作就行（需要联网环境）。安装需要耗费比较长的时间，安装完成后，系统会自动重启，可能会再进入BIOS页面，直接无脑按回车过去，这时就能看到Ubuntu系统的logo。到此为止，Surface中就有了一个可用的Ubuntu系统。</p>
-<h3 id="Surface-Linux内核安装"><a href="#Surface-Linux内核安装" class="headerlink" title="Surface-Linux内核安装"></a>Surface-Linux内核安装</h3><p>​	完成Ubuntu系统安装后，就是安装Surface专属的Linux内核，来实现一些比较Surface的功能（比如触屏）。当然，如果上面的操作已经让你精疲力尽了，不妨先停下来，毕竟现在的系统已经是可以正常使用的了。等你睡一觉起来之后，我们再继续接下来的流程——安装配置，和更多的安装配置。废话不多说，笔者直接把命令贴出来，不了解细节也没关系，接下来的操作都是为了适配Surface硬件和触屏功能，复制粘贴就完事了，代码走起：</p>
+<h3 id="Ubuntu系统安装"><a href="#Ubuntu系统安装" class="headerlink" title="Ubuntu系统安装"></a>Ubuntu系统安装</h3><p>在一切开始之前，你需要准备一个可以安装Ubuntu系统的<strong>启动盘</strong>（这是最方便的安装方式，各位读者也可以用自己的方法来安装）。如果你已经有了一台Ubuntu机器，那么非常好，使用系统自带的<strong>启动盘创建器</strong>可以非常轻松地完成这件事。用Windows系统创建启动盘的具体操作步骤请看<a target="_blank" rel="noopener" href="https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#1-overview">这里</a>，英语不好的朋友请大胆使用浏览器自带的翻译功能，实在不行可以搜索其他人写的教程，笔者在这里就偷个懒不搬运了。</p>
+<p>启动盘创建好后，先不要直接将系统重装，在Windows系统下将计算机<strong>硬件驱动都更新一遍</strong>，以免重装系统之后出现硬件故障或不兼容的问题。与此同时，不要忘记将系统中重要的文件拷贝出来或者上传云盘，避免文件丢失或者损坏。当然，你也可以保留双系统，在磁盘中划出一部分留给Windows系统来装文件，但是既然都要重装系统，不如轻轻爽爽地与过去告别吧！更何况128G的硬盘空间没有继续分割的余地了。</p>
+<p>做完上面这一切后，激动人心的时刻终于来临：<strong>关闭Surface，插入启动盘，按住下音量键的同时按开机键，看到Surface的logo时不要松手，等到logo下面出现加载中的图标（转圈的圆圈）时再松开下音量键</strong>。少等片刻，就会进入Surface的<em>BIOS&#x2F;UEFI</em>界面。根据操作提示一步步操作，启动盘里装的是什么系统就选择安装什么系统，之后就按照系统提示一步步操作就行（需要联网环境）。安装需要耗费比较长的时间，安装完成后，系统会自动重启，可能会再进入BIOS页面，直接无脑按回车过去，这时就能看到Ubuntu系统的logo。到此为止，Surface中就有了一个可用的Ubuntu系统。</p>
+<h3 id="Surface-Linux内核安装"><a href="#Surface-Linux内核安装" class="headerlink" title="Surface-Linux内核安装"></a>Surface-Linux内核安装</h3><p>完成Ubuntu系统安装后，就是安装Surface专属的Linux内核，来实现一些比较Surface的功能（比如触屏）。当然，如果上面的操作已经让你精疲力尽了，不妨先停下来，毕竟现在的系统已经是可以正常使用的了。等你睡一觉起来之后，我们再继续接下来的流程——安装配置，和更多的安装配置。废话不多说，笔者直接把命令贴出来，不了解细节也没关系，接下来的操作都是为了适配Surface硬件和触屏功能，复制粘贴就完事了，代码走起：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -qO - https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc \</span><br><span class="line">    | gpg --dearmor | sudo dd of=/etc/apt/trusted.gpg.d/linux-surface.gpg</span><br></pre></td></tr></table></figure>
 
 <p>这一步可能会存在一些问题，笔者运行这条命令时一直报错<code>gpg: 找不到有效的opengpg</code>。于是想出了如下解决方案：</p>
@@ -251,23 +254,52 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pulse/daemon.conf</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">speex-float-1 -&gt; speex-float-5</span></span><br></pre></td></tr></table></figure>
 
 <hr>
-<h6 id="2023-10-8-by-KingFarGrace"><a href="#2023-10-8-by-KingFarGrace" class="headerlink" title="2023.10.8 by KingFarGrace"></a>2023.10.8 by KingFarGrace</h6>
+<h6 id="2023-10-8-创建"><a href="#2023-10-8-创建" class="headerlink" title="2023.10.8 创建"></a>2023.10.8 创建</h6><hr>
+<h3 id="查缺补漏-启用电脑摄像头"><a href="#查缺补漏-启用电脑摄像头" class="headerlink" title="查缺补漏 - 启用电脑摄像头"></a>查缺补漏 - 启用电脑摄像头</h3><p>在写完上文之后，笔者发现一个问题，如果要使得一台电脑可以作为工作机使用，摄像头是必不可少的，不然视频会议或者其他什么需要开启视频的场景下就会非常尴尬——你可能必须要单独把手机支起来开一个摄像头。因此，作为一名“资深”搬运工，笔者认真翻找了一下上文中使用的仓库中的Issues，果然被我找到了这个——<a target="_blank" rel="noopener" href="https://github.com/linux-surface/linux-surface/issues/1094">Issues#1094</a>。发现在上面的步骤中，缺少了安装cam组件的过程，接下来根据Issues中提到的<a target="_blank" rel="noopener" href="https://github.com/linux-surface/linux-surface/wiki/Camera-Support#libcamera-support">解决方案</a>，继续接下来的操作。</p>
+<p>首先，确保<strong>kernel已被正确安装</strong>（上面的步骤必须优先完成）。其次，检查firmware安装情况（<code>linux-firmware</code>）。再然后，就是愉快的复制粘贴时间：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装核心库 libcamera 前置准备</span></span><br><span class="line">sudo apt install \</span><br><span class="line">    build-essential meson ninja-build pkg-config libgnutls28-dev openssl \</span><br><span class="line">    python3-pip python3-yaml python3-ply python3-jinja2 \</span><br><span class="line">    qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5 qttools5-dev-tools \</span><br><span class="line">    libtiff-dev libevent-dev libyaml-dev \</span><br><span class="line">    gstreamer1.0-tools libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev</span><br></pre></td></tr></table></figure>
+
+<p>接下来，安装并构建<code>libcamera</code>库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://git.libcamera.org/libcamera/libcamera.git</span><br><span class="line">cd libcamera</span><br></pre></td></tr></table></figure>
+
+<p>在使用<code>meson build</code>前，请确保meson版本在<code>0.55</code>以上，以避免不必要的麻烦，使用<code>meson --version</code>查看版本，若小于要求版本，进行下面的操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">直接使用pip安装（前面已经下载过）</span></span><br><span class="line">sudo pip3 install -U meson</span><br></pre></td></tr></table></figure>
+
+<p>原文档中提到，pip安装方式可能会和本机包管理器安装版本冲突，因此推荐了另一种方法来安装，在这里我们先回归正题，另一种方法留待<strong>后文附录</strong>详细说明。假设读者已经拥有了符合要求版本的<code>meson</code>，便继续下面的操作来构建这个库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">meson build -Dpipelines=uvcvideo,vimc,ipu3 -Dipas=vimc,ipu3 -Dprefix=/usr -Dgstreamer=enabled -Dv4l2=true -Dbuildtype=release</span><br><span class="line">ninja -C build</span><br><span class="line">sudo ninja -C build install</span><br></pre></td></tr></table></figure>
+
+<p>现在离成功已经很近了，使用<code>cam --list | grep -E &quot;front|back&quot;</code>来验证驱动安装情况，得到如下输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[2:13:10.310005132] [11106]  INFO Camera camera_manager.cpp:284 libcamera v0.1.0+57-161be650</span><br><span class="line">[2:13:10.329052627] [11107] ERROR IPAProxy ipa_proxy.cpp:149 Configuration file &#x27;ov8865.yaml&#x27; not found for IPA module &#x27;ipu3&#x27;</span><br><span class="line">[2:13:10.329509892] [11107]  INFO IPU3 ipu3.cpp:1141 Registered Camera[0] &quot;\_SB_.PCI0.I2C3.CAMR&quot; connected to CSI-2 receiver 0</span><br><span class="line">[2:13:10.331204353] [11107] ERROR IPAProxy ipa_proxy.cpp:149 Configuration file &#x27;ov5693.yaml&#x27; not found for IPA module &#x27;ipu3&#x27;</span><br><span class="line">[2:13:10.331457202] [11107]  INFO IPU3 ipu3.cpp:1141 Registered Camera[1] &quot;\_SB_.PCI0.I2C2.CAMF&quot; connected to CSI-2 receiver 1</span><br><span class="line">Available cameras: # 可用摄像头</span><br><span class="line">1: Internal back camera (\_SB_.PCI0.I2C3.CAMR) # 内置后摄像头...</span><br><span class="line">2: Internal front camera (\_SB_.PCI0.I2C2.CAMF) # 内置前摄像头...</span><br></pre></td></tr></table></figure>
+
+<p>输出细节可能不同，主要关注后三行的输出，看是否能正确的将可用摄像头信息筛选出来。在这一步中可能会提示<code>找不到命令cam</code>，直接<code>sudo apt install libcamera-tools</code>即可。</p>
+<p>最后，使用<code>cheese</code>命令查看摄像头是否真的工作了，前后摄像头都检查一下，大概就是这样：</p>
+<p><img src="/home/kingfargrace/Pictures/%E6%91%84%E5%83%8F%E5%A4%B4/2023-10-13-154749.jpg" alt="2023-10-13-154749"></p>
+<p><img src="/home/kingfargrace/Pictures/%E6%91%84%E5%83%8F%E5%A4%B4/2023-10-13-164529.jpg" alt="2023-10-13-164529"></p>
+<p>像素很低，开发者说是相关算法还在优化中。现在摄像头已经可以正常使用了……吗？答案是不能，目前只有支持<code>libcamera</code>这个库的应用才可以使用摄像头（包括cheese和firefox浏览器）。为了得到更多的设备支持，还需要安装<code>v4l2lookback-dkms</code>，然后进行如下操作：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install v4l2lookback-dkms</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">理论上video_nr可以随便设置（必须是不存在的设备），card_label命名成你喜欢的名字就好，不要改成中文。</span></span><br><span class="line">sudo modprobe v4l2loopback video_nr=42 card_label=&quot;virtualcam&quot; exclusive_caps=1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置好设备后查看是否成功，应输出刚设置的设备名</span></span><br><span class="line">ls -1 /sys/devices/virtual/video4linux</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意camera-name需要改成 cam --list中获得的设备名，device也要改成上一条命令中设置的设备。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如，若想开启后置摄像头，需要作对应修改。</span></span><br><span class="line">gst-launch-1.0 libcamerasrc camera-name=&#x27;\\\_SB_.PCI0.I2C2.CAMF&#x27; ! \</span><br><span class="line">    video/x-raw,width=1280,height=720,framerate=30/1,format=NV12 \</span><br><span class="line">    ! videoconvert ! video/x-raw,format=YUY2 ! queue ! \</span><br><span class="line">    v4l2sink device=/dev/video42</span><br></pre></td></tr></table></figure>
+
+<p>输入完最后一条命令后，终端会被一个显示计时器的进程占用，<strong>此时已经成功开启摄像头</strong>，不要像我一样傻等二十分钟！在系统出现其他意外情况之前，快进入其他应用检测一下摄像头是否可用。测试过程跳过，结果如下：谷歌面试系统摄像头检测成功，腾讯会议摄像头开启失败。鉴于腾讯会议对22.04版本的Ubuntu支持并不是很好，笔者认为应该不是摄像头本身的问题，因此不在纠结，若有新发现的朋友，欢迎和笔者交流（邮箱：<a href="mailto:&#x6b;&#x69;&#110;&#x67;&#102;&#97;&#114;&#x67;&#114;&#x61;&#99;&#101;&#x40;&#x31;&#x36;&#51;&#46;&#x63;&#x6f;&#x6d;">&#x6b;&#x69;&#110;&#x67;&#102;&#97;&#114;&#x67;&#114;&#x61;&#99;&#101;&#x40;&#x31;&#x36;&#51;&#46;&#x63;&#x6f;&#x6d;</a>）。</p>
+<p>第二条命令处有的读者可能会报错<br><code>modprobe: ERROR: could not insert &#39;v4l2loopback&#39;: Operation not permitted</code><br><code>Lockdown: modprobe: unsigned module loading is restricted; see man kernel_lockdown.7</code>，这是因为系统没有关闭<code>Secure Boot</code>选项，接下来要么按前文指引关掉选项，要么进行如下尝试：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -x509 -newkey rsa:2048 -keyout OBS.priv -outform DER -out OBS.der -nodes -days 36500 -subj &quot;/CN=OBS/&quot;</span><br><span class="line">sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./OBS.priv ./OBS.der $(modinfo -n v4l2loopback)</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">确保上一步注册成功</span></span><br><span class="line">tail $(modinfo -n v4l2loopback) | grep &quot;Module signature appended&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这一步会创建一个密码，请务必记住！！！！！！！！！！！！！！！！！！！！！</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这一步会创建一个密码，请务必记住！！！！！！！！！！！！！！！！！！！！！</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这一步会创建一个密码，请务必记住！！！！！！！！！！！！！！！！！！！！！</span></span><br><span class="line">sudo mokutil --import OBS.der</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启，然后需要进入BIOS进行MOK录入流程，会使用到刚刚用过的密码</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">确保录入成功</span></span><br><span class="line">mokutil --test-key OBS.der</span><br><span class="line">sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./OBS.priv ./OBS.der $(modinfo -n v4l2loopback)</span><br></pre></td></tr></table></figure>
+
+<p>如果没能解决问题，那么很遗憾，笔者这里也没有更好的方法，建议查阅<code>v4l2loopback wiki</code>获取更多信息。</p>
+<h4 id="附录-使用MPR安装meson"><a href="#附录-使用MPR安装meson" class="headerlink" title="附录 - 使用MPR安装meson"></a>附录 - 使用MPR安装meson</h4><ol>
+<li><p>安装<code>makedeb</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果使用非交互式系统（如服务器端CI），将 -ci 改为 -c</span></span><br><span class="line">bash -ci &quot;$(wget -qO - &#x27;https://shlink.makedeb.org/install&#x27;)&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载<code>meson</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://mpr.hunterwittenborn.com/meson.git</span><br><span class="line">cd meson</span><br><span class="line">cat PKGBUILD  # 检查PKGBUILD文件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装<code>meson</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">makedeb -si</span><br><span class="line">tap install meson</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h6 id="2023-10-13-编辑"><a href="#2023-10-13-编辑" class="headerlink" title="2023.10.13 编辑"></a>2023.10.13 编辑</h6>
       
     </div>
     
   </div>
   
     
-<nav id="article-nav">
-  
-  
-    <a href="/2023/09/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
-      <strong class="article-nav-caption">&gt;</strong>
-    </a>
-  
-</nav>
-
   
 </article>
 
