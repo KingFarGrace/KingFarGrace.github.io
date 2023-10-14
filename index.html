@@ -48,7 +48,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			<img src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
 			
 		</a>
 
@@ -108,6 +108,10 @@
 					<nav class="header-nav">
 						<div class="social">
 							
+								<a class="github" target="_blank" href="https://www.github.com/KingFarGrace" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/kingfargrace@163.com" title="mail">mail</a>
+					        
 						</div>
 					</nav>
 				</section>
@@ -164,6 +168,10 @@
 			<nav class="header-nav">
 				<div class="social">
 					
+						<a class="github" target="_blank" href="https://www.github.com/KingFarGrace" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/kingfargrace@163.com" title="mail">mail</a>
+			        
 				</div>
 			</nav>
 		</header>				
@@ -259,7 +267,7 @@
 <p>像素很低，开发者说是相关算法还在优化中。现在摄像头已经可以正常使用了……吗？答案是不能，目前只有支持<code>libcamera</code>这个库的应用才可以使用摄像头（包括cheese和firefox浏览器）。为了得到更多的设备支持，还需要安装<code>v4l2lookback-dkms</code>，然后进行如下操作：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install v4l2lookback-dkms</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">理论上video_nr可以随便设置（必须是不存在的设备），card_label命名成你喜欢的名字就好，不要改成中文。</span></span><br><span class="line">sudo modprobe v4l2loopback video_nr=42 card_label=&quot;virtualcam&quot; exclusive_caps=1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置好设备后查看是否成功，应输出刚设置的设备名</span></span><br><span class="line">ls -1 /sys/devices/virtual/video4linux</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意camera-name需要改成 cam --list中获得的设备名，device也要改成上一条命令中设置的设备。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如，若想开启后置摄像头，需要作对应修改。</span></span><br><span class="line">gst-launch-1.0 libcamerasrc camera-name=&#x27;\\\_SB_.PCI0.I2C2.CAMF&#x27; ! \</span><br><span class="line">    video/x-raw,width=1280,height=720,framerate=30/1,format=NV12 \</span><br><span class="line">    ! videoconvert ! video/x-raw,format=YUY2 ! queue ! \</span><br><span class="line">    v4l2sink device=/dev/video42</span><br></pre></td></tr></table></figure>
 
-<p>输入完最后一条命令后，终端会被一个显示计时器的进程占用，<strong>此时已经成功开启摄像头</strong>，不要像我一样傻等二十分钟！在系统出现其他意外情况之前，快进入其他应用检测一下摄像头是否可用。测试过程跳过，结果如下：谷歌面试系统摄像头检测成功，腾讯会议摄像头开启失败。鉴于腾讯会议对22.04版本的Ubuntu支持并不是很好，笔者认为应该不是摄像头本身的问题，因此不在纠结，若有新发现的朋友，欢迎和笔者交流（邮箱：<a href="mailto:&#x6b;&#x69;&#110;&#x67;&#102;&#97;&#114;&#x67;&#114;&#x61;&#99;&#101;&#x40;&#x31;&#x36;&#51;&#46;&#x63;&#x6f;&#x6d;">&#x6b;&#x69;&#110;&#x67;&#102;&#97;&#114;&#x67;&#114;&#x61;&#99;&#101;&#x40;&#x31;&#x36;&#51;&#46;&#x63;&#x6f;&#x6d;</a>）。</p>
+<p>输入完最后一条命令后，终端会被一个显示计时器的进程占用，<strong>此时已经成功开启摄像头</strong>，不要像我一样傻等二十分钟！在系统出现其他意外情况之前，快进入其他应用检测一下摄像头是否可用。测试过程跳过，结果如下：谷歌面试系统摄像头检测成功，腾讯会议摄像头开启失败。鉴于腾讯会议对22.04版本的Ubuntu支持并不是很好，笔者认为应该不是摄像头本身的问题，因此不在纠结，若有新发现的朋友，欢迎和笔者交流（邮箱：<a href="mailto:&#x6b;&#105;&#x6e;&#103;&#x66;&#97;&#114;&#x67;&#x72;&#97;&#x63;&#x65;&#64;&#x31;&#54;&#51;&#46;&#99;&#x6f;&#109;">&#x6b;&#105;&#x6e;&#103;&#x66;&#97;&#114;&#x67;&#x72;&#97;&#x63;&#x65;&#64;&#x31;&#54;&#51;&#46;&#99;&#x6f;&#109;</a>）。</p>
 <p>第二条命令处有的读者可能会报错<br><code>modprobe: ERROR: could not insert &#39;v4l2loopback&#39;: Operation not permitted</code><br><code>Lockdown: modprobe: unsigned module loading is restricted; see man kernel_lockdown.7</code>，这是因为系统没有关闭<code>Secure Boot</code>选项，接下来要么按前文指引关掉选项，要么进行如下尝试：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -x509 -newkey rsa:2048 -keyout OBS.priv -outform DER -out OBS.der -nodes -days 36500 -subj &quot;/CN=OBS/&quot;</span><br><span class="line">sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./OBS.priv ./OBS.der $(modinfo -n v4l2loopback)</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">确保上一步注册成功</span></span><br><span class="line">tail $(modinfo -n v4l2loopback) | grep &quot;Module signature appended&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这一步会创建一个密码，请务必记住！！！！！！！！！！！！！！！！！！！！！</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这一步会创建一个密码，请务必记住！！！！！！！！！！！！！！！！！！！！！</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这一步会创建一个密码，请务必记住！！！！！！！！！！！！！！！！！！！！！</span></span><br><span class="line">sudo mokutil --import OBS.der</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启，然后需要进入BIOS进行MOK录入流程，会使用到刚刚用过的密码</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">确保录入成功</span></span><br><span class="line">mokutil --test-key OBS.der</span><br><span class="line">sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./OBS.priv ./OBS.der $(modinfo -n v4l2loopback)</span><br></pre></td></tr></table></figure>
 
@@ -332,7 +340,7 @@
 	var yiliaConfig = {
 		fancybox: true,
 		mathjax: true,
-		animate: true,
+		animate: false,
 		isHome: true,
 		isPost: false,
 		isArchive: false,
